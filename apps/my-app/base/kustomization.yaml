@@ -6,4 +6,6 @@ resources:
 - service.yaml
 - ingress.yaml
 - servicemonitor.yaml
-- grafana-dashboard.yaml 
+- grafana-dashboard.yaml
+- image-updater-config.yaml
+- dockerhub-secret.yaml 

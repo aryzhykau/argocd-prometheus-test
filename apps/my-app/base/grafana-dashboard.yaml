@@ -4,34 +4,48 @@ metadata:
   name: my-app-dashboard
   namespace: prometheus
   labels:
-    grafana_dashboard: "1"
+    grafana_dashboard: "1"  # Метка, по которой Grafana находит дашборды
 data:
   my-app-dashboard.json: |
     {
+      # Основные настройки дашборда
+      "editable": true,           # Можно ли редактировать дашборд
+      "graphTooltip": 0,         # Настройки всплывающих подсказок
+      "refresh": "5s",           # Частота обновления данных
+      "schemaVersion": 38,       # Версия схемы дашборда
+      "style": "dark",           # Тема оформления
+      "tags": ["my-app"],        # Теги для поиска
+      "time": {                  # Настройки временного диапазона
+        "from": "now-1h",
+        "to": "now"
+      },
+      "timezone": "",            # Часовой пояс
+      "title": "My App Dashboard", # Заголовок дашборда
+      "uid": "my-app-dashboard",  # Уникальный идентификатор дашборда
+      "version": 1,              # Версия дашборда
+
+      # Настройки аннотаций (для алертов и заметок)
       "annotations": {
         "list": [
           {
-            "builtIn": 1,
+            "builtIn": 1,         # Встроенная аннотация
             "datasource": {
               "type": "grafana",
               "uid": "-- Grafana --"
             },
-            "enable": true,
-            "hide": true,
-            "iconColor": "rgba(0, 211, 255, 1)",
-            "name": "Annotations & Alerts",
+            "enable": true,       # Включена ли аннотация
+            "hide": true,         # Скрыта ли по умолчанию
+            "iconColor": "rgba(0, 211, 255, 1)", # Цвет иконки
+            "name": "Annotations & Alerts", # Название
             "type": "dashboard"
           }
         ]
       },
-      "editable": true,
-      "fiscalYearStartMonth": 0,
-      "graphTooltip": 0,
-      "id": null,
-      "links": [],
-      "liveNow": false,
+
+      # Панели дашборда
       "panels": [
         {
+          # Панель 1: Использование памяти
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
@@ -39,40 +53,22 @@ data:
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "palette-classic"
+                "mode": "palette-classic"  # Цветовая схема
               },
               "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
+                "drawStyle": "line",       # Стиль отрисовки (линия)
+                "fillOpacity": 10,         # Прозрачность заливки
+                "lineWidth": 1,            # Толщина линии
+                "showPoints": "never",     # Отображение точек
+                "lineInterpolation": "linear", # Тип интерполяции
+                "spanNulls": false,        # Обработка пропущенных значений
+                "stacking": {              # Настройки стекирования
                   "group": "A",
                   "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
                 }
               },
-              "mappings": [],
-              "thresholds": {
+              "mappings": [],              # Преобразования значений
+              "thresholds": {              # Пороговые значения
                 "mode": "absolute",
                 "steps": [
                   {
@@ -81,43 +77,38 @@ data:
                   }
                 ]
               },
-              "unit": "bytes"
-            },
-            "overrides": []
+              "unit": "bytes"             # Единицы измерения
+            }
           },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 0
+          "gridPos": {                    # Позиция на сетке
+            "h": 8,                       # Высота
+            "w": 12,                      # Ширина
+            "x": 0,                       # X координата
+            "y": 0                        # Y координата
           },
-          "id": 1,
+          "id": 1,                        # ID панели
           "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
+            "legend": {                    # Настройки легенды
+              "displayMode": "list",       # Режим отображения
+              "placement": "bottom",       # Расположение
+              "showLegend": true          # Показывать ли легенду
             },
-            "tooltip": {
+            "tooltip": {                   # Настройки всплывающих подсказок
               "mode": "single",
               "sort": "none"
             }
           },
-          "targets": [
+          "targets": [                     # Запросы к Prometheus
             {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "expr": "process_resident_memory_bytes{job=\"my-app\"}",
-              "refId": "A"
+              "expr": "process_resident_memory_bytes{job=\"my-app\"}", # PromQL запрос
+              "refId": "A"                # Идентификатор запроса
             }
           ],
-          "title": "Memory Usage",
-          "type": "timeseries"
+          "title": "Memory Usage",        # Заголовок панели
+          "type": "timeseries"            # Тип визуализации
         },
         {
+          # Панель 2: Использование CPU
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
@@ -128,33 +119,15 @@ data:
                 "mode": "palette-classic"
               },
               "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
                 "drawStyle": "line",
                 "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
                 "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
                 "showPoints": "never",
+                "lineInterpolation": "linear",
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
                 }
               },
               "mappings": [],
@@ -167,8 +140,7 @@ data:
                   }
                 ]
               }
-            },
-            "overrides": []
+            }
           },
           "gridPos": {
             "h": 8,
@@ -179,7 +151,6 @@ data:
           "id": 2,
           "options": {
             "legend": {
-              "calcs": [],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -191,11 +162,7 @@ data:
           },
           "targets": [
             {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "expr": "rate(process_cpu_seconds_total{job=\"my-app\"}[5m])",
+              "expr": "rate(process_cpu_seconds_total{job=\"my-app\"}[5m])", # CPU usage rate
               "refId": "A"
             }
           ],
@@ -203,6 +170,7 @@ data:
           "type": "timeseries"
         },
         {
+          # Панель 3: HTTP запросы
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
@@ -213,33 +181,15 @@ data:
                 "mode": "palette-classic"
               },
               "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
                 "drawStyle": "line",
                 "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
                 "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
                 "showPoints": "never",
+                "lineInterpolation": "linear",
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
                 }
               },
               "mappings": [],
@@ -252,8 +202,7 @@ data:
                   }
                 ]
               }
-            },
-            "overrides": []
+            }
           },
           "gridPos": {
             "h": 8,
@@ -264,7 +213,6 @@ data:
           "id": 3,
           "options": {
             "legend": {
-              "calcs": [],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -276,11 +224,7 @@ data:
           },
           "targets": [
             {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "expr": "http_requests_total{job=\"my-app\"}",
+              "expr": "http_requests_total{job=\"my-app\"}", # Total HTTP requests
               "refId": "A"
             }
           ],
@@ -288,6 +232,7 @@ data:
           "type": "timeseries"
         },
         {
+          # Панель 4: Горутины
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
@@ -298,33 +243,15 @@ data:
                 "mode": "palette-classic"
               },
               "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
                 "drawStyle": "line",
                 "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
                 "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
                 "showPoints": "never",
+                "lineInterpolation": "linear",
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
                 }
               },
               "mappings": [],
@@ -337,8 +264,7 @@ data:
                   }
                 ]
               }
-            },
-            "overrides": []
+            }
           },
           "gridPos": {
             "h": 8,
@@ -349,7 +275,6 @@ data:
           "id": 4,
           "options": {
             "legend": {
-              "calcs": [],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -361,33 +286,12 @@ data:
           },
           "targets": [
             {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "expr": "go_goroutines{job=\"my-app\"}",
+              "expr": "go_goroutines{job=\"my-app\"}", # Number of goroutines
               "refId": "A"
             }
           ],
           "title": "Goroutines",
           "type": "timeseries"
         }
-      ],
-      "refresh": "5s",
-      "schemaVersion": 38,
-      "style": "dark",
-      "tags": ["my-app"],
-      "templating": {
-        "list": []
-      },
-      "time": {
-        "from": "now-1h",
-        "to": "now"
-      },
-      "timepicker": {},
-      "timezone": "",
-      "title": "My App Dashboard",
-      "uid": "my-app-dashboard",
-      "version": 1,
-      "weekStart": ""
+      ]
     } 
