@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: rorychan0697/my-app:v1  # Замените на ваш образ
+        image: rorychan0697/my-app:v0.1.0  # Замените на ваш образ
         ports:
         - containerPort: 8080
         resources:

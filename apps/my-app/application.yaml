@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git://github.com/aryzhykau/argocd-prometheus-test  # Замените на ваш SSH URL
+    repoURL: git@github.com:aryzhykau/argocd-prometheus-test.git
     targetRevision: HEAD
-    path: gitops-repo/apps/my-app/base
+    path: apps/my-app/base
   destination:
     server: https://kubernetes.default.svc
     namespace: default
