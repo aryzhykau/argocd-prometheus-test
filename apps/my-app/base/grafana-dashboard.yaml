@@ -4,48 +4,42 @@ metadata:
   name: my-app-dashboard
   namespace: monitoring
   labels:
-    grafana_dashboard: "1"  # Метка, по которой Grafana находит дашборды
+    grafana_dashboard: "1"
 data:
   my-app-dashboard.json: |
     {
-      # Основные настройки дашборда
-      "editable": true,           # Можно ли редактировать дашборд
-      "graphTooltip": 0,         # Настройки всплывающих подсказок
-      "refresh": "5s",           # Частота обновления данных
-      "schemaVersion": 38,       # Версия схемы дашборда
-      "style": "dark",           # Тема оформления
-      "tags": ["my-app"],        # Теги для поиска
-      "time": {                  # Настройки временного диапазона
+      "editable": true,
+      "graphTooltip": 0,
+      "refresh": "5s",
+      "schemaVersion": 38,
+      "style": "dark",
+      "tags": ["my-app"],
+      "time": {
         "from": "now-1h",
         "to": "now"
       },
-      "timezone": "",            # Часовой пояс
-      "title": "My App Dashboard", # Заголовок дашборда
-      "uid": "my-app-dashboard",  # Уникальный идентификатор дашборда
-      "version": 1,              # Версия дашборда
-
-      # Настройки аннотаций (для алертов и заметок)
+      "timezone": "",
+      "title": "My App Dashboard",
+      "uid": "my-app-dashboard",
+      "version": 1,
       "annotations": {
         "list": [
           {
-            "builtIn": 1,         # Встроенная аннотация
+            "builtIn": 1,
             "datasource": {
               "type": "grafana",
               "uid": "-- Grafana --"
             },
-            "enable": true,       # Включена ли аннотация
-            "hide": true,         # Скрыта ли по умолчанию
-            "iconColor": "rgba(0, 211, 255, 1)", # Цвет иконки
-            "name": "Annotations & Alerts", # Название
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
             "type": "dashboard"
           }
         ]
       },
-
-      # Панели дашборда
       "panels": [
         {
-          # Панель 1: Использование памяти
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
@@ -53,22 +47,22 @@ data:
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "palette-classic"  # Цветовая схема
+                "mode": "palette-classic"
               },
               "custom": {
-                "drawStyle": "line",       # Стиль отрисовки (линия)
-                "fillOpacity": 10,         # Прозрачность заливки
-                "lineWidth": 1,            # Толщина линии
-                "showPoints": "never",     # Отображение точек
-                "lineInterpolation": "linear", # Тип интерполяции
-                "spanNulls": false,        # Обработка пропущенных значений
-                "stacking": {              # Настройки стекирования
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "lineWidth": 1,
+                "showPoints": "never",
+                "lineInterpolation": "linear",
+                "spanNulls": false,
+                "stacking": {
                   "group": "A",
                   "mode": "none"
                 }
               },
-              "mappings": [],              # Преобразования значений
-              "thresholds": {              # Пороговые значения
+              "mappings": [],
+              "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
@@ -77,38 +71,37 @@ data:
                   }
                 ]
               },
-              "unit": "bytes"             # Единицы измерения
+              "unit": "bytes"
             }
           },
-          "gridPos": {                    # Позиция на сетке
-            "h": 8,                       # Высота
-            "w": 12,                      # Ширина
-            "x": 0,                       # X координата
-            "y": 0                        # Y координата
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 0
           },
-          "id": 1,                        # ID панели
+          "id": 1,
           "options": {
-            "legend": {                    # Настройки легенды
-              "displayMode": "list",       # Режим отображения
-              "placement": "bottom",       # Расположение
-              "showLegend": true          # Показывать ли легенду
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
             },
-            "tooltip": {                   # Настройки всплывающих подсказок
+            "tooltip": {
               "mode": "single",
               "sort": "none"
             }
           },
-          "targets": [                     # Запросы к Prometheus
+          "targets": [
             {
-              "expr": "process_resident_memory_bytes{job=\"my-app\"}", # PromQL запрос
-              "refId": "A"                # Идентификатор запроса
+              "expr": "process_resident_memory_bytes{job=\"my-app\"}",
+              "refId": "A"
             }
           ],
-          "title": "Memory Usage",        # Заголовок панели
-          "type": "timeseries"            # Тип визуализации
+          "title": "Memory Usage",
+          "type": "timeseries"
         },
         {
-          # Панель 2: Использование CPU
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
@@ -162,7 +155,7 @@ data:
           },
           "targets": [
             {
-              "expr": "rate(process_cpu_seconds_total{job=\"my-app\"}[5m])", # CPU usage rate
+              "expr": "rate(process_cpu_seconds_total{job=\"my-app\"}[5m])",
               "refId": "A"
             }
           ],
@@ -170,7 +163,6 @@ data:
           "type": "timeseries"
         },
         {
-          # Панель 3: HTTP запросы
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
@@ -224,7 +216,7 @@ data:
           },
           "targets": [
             {
-              "expr": "http_requests_total{job=\"my-app\"}", # Total HTTP requests
+              "expr": "http_requests_total{job=\"my-app\"}",
               "refId": "A"
             }
           ],
@@ -232,7 +224,6 @@ data:
           "type": "timeseries"
         },
         {
-          # Панель 4: Горутины
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
@@ -286,7 +277,7 @@ data:
           },
           "targets": [
             {
-              "expr": "go_goroutines{job=\"my-app\"}", # Number of goroutines
+              "expr": "go_goroutines{job=\"my-app\"}",
               "refId": "A"
             }
           ],
