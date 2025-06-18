@@ -7,8 +7,9 @@ metadata:
     app.kubernetes.io/name: my-app
     app.kubernetes.io/instance: my-app
   annotations:
-    argocd-image-updater.argoproj.io/image-list: app=rorychan0697/my-app:0.x.0
+    argocd-image-updater.argoproj.io/image-list: app=docker.io/rorychan0697/my-app:*
     argocd-image-updater.argoproj.io/app.update-strategy: semver
+    argocd-image-updater.argoproj.io/app.write-back-method: git:kustomization
     argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
