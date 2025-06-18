@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: my-app-dashboard
-  namespace: prometheus
+  namespace: monitoring
   labels:
     grafana_dashboard: "1"  # Метка, по которой Grafana находит дашборды
 data:
