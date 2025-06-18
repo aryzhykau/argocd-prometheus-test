@@ -11,6 +11,6 @@ resources:
 - dockerhub-secret.yaml
 
 images:
-- name: app
+- name: docker.io/rorychan0697/my-app
   newName: docker.io/rorychan0697/my-app
-  newTag: 0.1.0 # Argo CD Image Updater будет обновлять этот тег 
+  newTag: 0.1.0
