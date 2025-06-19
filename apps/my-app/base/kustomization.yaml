@@ -6,6 +6,8 @@ resources:
 - ingress.yaml
 - servicemonitor.yaml
 - grafana-dashboard.yaml
+- gachirepo.yaml
+- dirtyslave.yaml
 images:
 - name: docker.io/rorychan0697/my-app
   newTag: v0.10.0
