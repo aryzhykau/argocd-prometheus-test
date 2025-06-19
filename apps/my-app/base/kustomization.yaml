@@ -8,4 +8,4 @@ resources:
 - grafana-dashboard.yaml
 images:
 - name: docker.io/rorychan0697/my-app
-  newTag: v0.12.0
+  newTag: v0.13.0
