@@ -15,4 +15,26 @@ spec:
   - port: 80
     name: http
     targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-stable
+spec:
+  ports:
+  - port: 80
+    name: http
+    targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-canary
+spec:
+  ports:
+  - port: 80
+    name: http
+    targetPort: 8080
   type: ClusterIP 
