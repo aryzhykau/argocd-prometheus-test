@@ -1,0 +1,28 @@
+apiVersion: gachi.gachi.dev/v1
+kind: DirtySlave
+metadata:
+  name: build-main-branch
+  namespace: default
+spec:
+  # The master this slave serves.
+  gachiRepoName: gachikube-repo
+
+  # The specific thing to watch. "Get your ass back here!"
+  ref: "refs/heads/main"
+
+  # When to get to work. On "push" it is.
+  events:
+    - push
+
+  # The image we are building. Let's make it strong.
+  imageName: "docker.io/rorychan0697/my-app"
+  tag: "latest"
+
+  # Optional: for private docker registries
+  # secrets:
+  #   - name: docker-registry-secret
+
+  # Optional: pump some environment variables into the build
+  # env:
+  #   - name: GACHI_MODE
+  #     value: "HARD"
